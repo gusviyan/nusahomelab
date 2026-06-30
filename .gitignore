@@ -1,0 +1,10 @@
+# *.log
+# .DS_Store
+# .env
+# .env.backup
+# .env.production
+# /.idea
+# /.vscode
+# /public/uploads/*
+# !/public/uploads/.gitkeep
+# Thumbs.db

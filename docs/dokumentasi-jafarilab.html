@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dokumentasi Teknis JafariLab</title>
+<style>
+@page{size:A4;margin:17mm 16mm 18mm}@page cover{size:A4;margin:0}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}html,body{margin:0;padding:0}body{font:9.7pt/1.48 Arial,sans-serif;color:#17233b}h1,h2,h3,h4{color:#103e91;line-height:1.2;break-after:avoid-page;page-break-after:avoid}h1{font-size:29pt;margin:0 0 10px}h2{font-size:19pt;border-bottom:2px solid #1b5fd1;padding-bottom:6px;margin:0 0 13px;break-before:page;page-break-before:always}h3{font-size:13pt;margin:17px 0 7px}h4{font-size:11pt;margin:14px 0 5px}h2+*,h3+*,h4+*{break-before:avoid-page}p{margin:5px 0 9px;orphans:3;widows:3}li{orphans:2;widows:2}a{color:#1659bd}.cover{page:cover;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:center;break-after:page;page-break-after:always;background:linear-gradient(145deg,#0b2d6c,#1762d8);color:#fff;margin:0;padding:34mm 30mm}.cover h1,.cover h2{color:#fff;border:0;break-before:auto;page-break-before:auto}.cover h1{font-size:40pt}.cover h2{font-size:18pt;font-weight:400;margin:0}.cover .tag{font-size:11pt;letter-spacing:2px;text-transform:uppercase;color:#6ee4ff}.cover .meta{margin-top:auto;color:#d8e7ff}.toc{break-after:page;page-break-after:always}.toc h2{break-before:auto;page-break-before:auto}.toc ol{columns:2;column-gap:35px}.toc li{margin:7px 0}.page-break{display:none}.avoid{break-inside:avoid-page;page-break-inside:avoid}code,pre{font-family:Consolas,monospace}code{background:#eef4fd;padding:1px 4px;border-radius:3px;color:#0b438f}pre{background:#10213e;color:#e9f2ff;padding:11px 13px;border-radius:7px;white-space:pre-wrap;word-break:break-word;font-size:8.2pt;line-height:1.4;break-inside:avoid-page;page-break-inside:avoid}.note,.warning,.good{padding:9px 12px;border-left:4px solid;margin:11px 0;background:#f4f8ff;break-inside:avoid-page;page-break-inside:avoid}.note{border-color:#1762d8}.warning{border-color:#e79b19;background:#fff8e9}.good{border-color:#27a56b;background:#edfbf5}table{width:100%;border-collapse:collapse;margin:9px 0 16px;font-size:8.5pt;page-break-inside:auto}thead{display:table-header-group}tr{break-inside:avoid-page;page-break-inside:avoid}th,td{border:1px solid #ced9ea;padding:5px 6px;text-align:left;vertical-align:top}th{background:#e9f1fd;color:#103e91}.tree{background:#f5f8fc;color:#17233b;border:1px solid #d8e2f0}.flow{display:flex;gap:8px;align-items:center;justify-content:center;margin:14px 0;break-inside:avoid-page;page-break-inside:avoid}.flow span{border:1px solid #8aadda;border-radius:5px;padding:8px;background:#f3f8ff}.muted{color:#637089}.check li{margin:4px 0}.footer-note{font-size:8pt;color:#6a7588;border-top:1px solid #d8e2f0;margin-top:25px;padding-top:7px}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="tag">Dokumentasi Proyek & Panduan Coding</div>
+  <h1>JafariLab</h1>
+  <h2>Website Portofolio dan Content Management System</h2>
+  <p>Arsitektur, instalasi, API, database, panel admin, standar pengembangan, deployment, keamanan, dan troubleshooting.</p>
+  <div class="meta"><b>Versi dokumen:</b> 1.0<br><b>Tanggal:</b> 29 Juni 2026<br><b>Runtime:</b> Node.js + Express + MySQL</div>
+</section>
+
+<section class="toc">
+<h2>Daftar Isi</h2>
+<ol>
+  <li>Ringkasan proyek</li><li>Teknologi dan dependensi</li><li>Arsitektur sistem</li><li>Struktur direktori</li>
+  <li>Persyaratan dan instalasi</li><li>Konfigurasi environment</li><li>Menjalankan aplikasi</li><li>Database dan seeding</li>
+  <li>Alur autentikasi</li><li>Dokumentasi API</li><li>Panel admin dan CMS</li><li>Frontend publik</li>
+  <li>Pengelolaan upload</li><li>Panduan coding</li><li>Pola penambahan fitur</li><li>Validasi dan pengujian</li>
+  <li>Keamanan</li><li>Deployment dan ngrok</li><li>Backup dan pemeliharaan</li><li>Troubleshooting</li>
+  <li>Keterbatasan dan roadmap</li><li>Checklist serah terima</li>
+</ol>
+<div class="note"><b>Ruang lingkup:</b> dokumen ini menggambarkan kondisi source code pada saat dibuat. Nilai rahasia dari <code>.env</code> tidak disalin ke dokumen.</div>
+</section>
+
+<h2>1. Ringkasan Proyek</h2>
+<p>JafariLab adalah website portofolio kreatif dengan halaman publik dan panel administrasi terproteksi. Pengunjung dapat melihat profil, layanan, portofolio, statistik, serta informasi kontak. Administrator dapat mengelola proyek, layanan, dan hampir seluruh teks halaman tanpa mengubah source code.</p>
+<table><tr><th>Komponen</th><th>Fungsi</th></tr>
+<tr><td>Website publik</td><td>Menampilkan konten profil, hero, keunggulan, layanan, portofolio, tentang, statistik, kontak, dan footer.</td></tr>
+<tr><td>Panel admin</td><td>Login, CRUD proyek, CRUD layanan, serta penyuntingan pengaturan website.</td></tr>
+<tr><td>REST API</td><td>Penghubung browser dengan data MySQL dalam format JSON.</td></tr>
+<tr><td>MySQL</td><td>Menyimpan administrator, proyek, layanan, dan pengaturan key-value.</td></tr>
+<tr><td>Upload lokal</td><td>Menyimpan gambar portofolio di <code>public/uploads/</code>.</td></tr></table>
+
+<h2>2. Teknologi dan Dependensi</h2>
+<table><tr><th>Teknologi</th><th>Peran</th><th>Versi proyek</th></tr>
+<tr><td>Node.js</td><td>Runtime server JavaScript. Proyek memakai ES Modules.</td><td>Disarankan Node.js LTS modern</td></tr>
+<tr><td>Express</td><td>HTTP server, routing, static files, dan middleware.</td><td>^4.18.2</td></tr>
+<tr><td>MySQL / mysql2</td><td>Database dan connection pool berbasis Promise.</td><td>mysql2 ^3.22.5</td></tr>
+<tr><td>express-session</td><td>Session login admin berbasis cookie.</td><td>^1.19.0</td></tr>
+<tr><td>bcryptjs</td><td>Hash dan verifikasi password administrator.</td><td>^3.0.3</td></tr>
+<tr><td>Multer</td><td>Parsing multipart dan upload gambar.</td><td>^2.2.0</td></tr>
+<tr><td>dotenv</td><td>Membaca konfigurasi dari <code>.env</code>.</td><td>^16.3.1</td></tr>
+<tr><td>HTML/CSS/JavaScript</td><td>UI publik dan panel admin tanpa framework frontend.</td><td>Native browser</td></tr></table>
+<p><code>better-sqlite3</code> dipertahankan untuk migrasi satu kali dari database SQLite lama ke MySQL. Ia bukan database utama aplikasi saat ini.</p>
+
+<h2>3. Arsitektur Sistem</h2>
+<div class="flow"><span>Browser publik/admin</span><b>→ HTTP/JSON →</b><span>Express routes</span><b>→ SQL →</b><span>MySQL</span></div>
+<p>Express melayani file statis dari folder <code>public</code>. JavaScript browser mengambil data melalui endpoint <code>/api/*</code>. Route publik menggunakan query baca, sedangkan route mutasi admin melewati middleware <code>requireAuth</code>. Gambar diunggah ke disk lokal dan path-nya disimpan dalam tabel <code>projects</code>.</p>
+<h3>Alur startup</h3>
+<ol><li><code>index.js</code> memuat environment.</li><li>Middleware JSON, form, session, dan static file dipasang.</li><li><code>initDatabase()</code> membuat database/tabel bila belum ada.</li><li>Migrasi SQLite dijalankan bila relevan.</li><li>Data awal dan akun admin dibuat bila tabel masih kosong.</li><li>Express mendengarkan pada port dari <code>PORT</code>.</li></ol>
+
+<h2>4. Struktur Direktori</h2>
+<pre class="tree">JafariLab/
+├── index.js                    # Entry point Express
+├── package.json                # Scripts dan dependensi
+├── .env                        # Konfigurasi lokal (rahasia)
+├── config/
+│   ├── database.js             # Pool MySQL, migrasi, schema, seed
+│   └── portfolio.db*           # Data SQLite lama/migrasi
+├── database/
+│   └── jafarilab.sql           # Schema MySQL untuk import manual
+├── middleware/
+│   └── auth.js                 # Proteksi endpoint admin
+├── routes/
+│   ├── auth.js                 # Login, status sesi, logout
+│   ├── portfolio.js            # CRUD proyek + upload
+│   ├── services.js             # CRUD layanan
+│   └── settings.js             # Baca/simpan konten website
+├── public/
+│   ├── index.html              # Halaman publik
+│   ├── login.html              # Login admin
+│   ├── css/                    # Stylesheet publik/admin/responsif
+│   ├── js/app.js               # Hidrasi konten publik
+│   ├── js/admin.js             # Interaksi CMS
+│   └── uploads/                # File gambar proyek
+├── views/admin/
+│   └── dashboard.html          # Dashboard CMS
+└── docs/
+    ├── dokumentasi-jafarilab.html
+    └── Dokumentasi-JafariLab.pdf</pre>
+
+<div class="page-break"></div>
+<h2>5. Persyaratan dan Instalasi</h2>
+<h3>Persyaratan</h3>
+<ul><li>Node.js dan npm.</li><li>MySQL Server aktif.</li><li>Akun MySQL dengan izin membuat database dan tabel.</li><li>Windows PowerShell, Terminal, atau shell setara.</li></ul>
+<h3>Langkah instalasi</h3>
+<pre>cd C:\Users\aeste\JafariLab
+npm install</pre>
+<p>Salin atau buat <code>.env</code>, isi koneksi database dan kredensial awal. Pastikan MySQL aktif, lalu:</p>
+<pre>npm start
+# sama dengan:
+node index.js</pre>
+<p>Buka <code>http://localhost:3000</code> bila <code>PORT=3000</code>.</p>
+
+<h2>6. Konfigurasi Environment</h2>
+<table><tr><th>Variabel</th><th>Wajib</th><th>Keterangan</th><th>Contoh aman</th></tr>
+<tr><td>PORT</td><td>Tidak</td><td>Port HTTP; fallback source code adalah 5000.</td><td>3000</td></tr>
+<tr><td>DB_HOST</td><td>Disarankan</td><td>Host MySQL.</td><td>127.0.0.1</td></tr>
+<tr><td>DB_PORT</td><td>Tidak</td><td>Port MySQL; default 3306.</td><td>3306</td></tr>
+<tr><td>DB_NAME</td><td>Tidak</td><td>Nama database; default <code>jafarilab</code>.</td><td>jafarilab</td></tr>
+<tr><td>DB_USER</td><td>Ya</td><td>Username database.</td><td>jafarilab_app</td></tr>
+<tr><td>DB_PASSWORD</td><td>Ya</td><td>Password database.</td><td>gunakan password kuat</td></tr>
+<tr><td>ADMIN_USERNAME</td><td>Seed awal</td><td>Dipakai hanya jika tabel admins kosong.</td><td>admin</td></tr>
+<tr><td>ADMIN_PASSWORD</td><td>Seed awal</td><td>Di-hash bcrypt ketika akun awal dibuat.</td><td>minimal 12 karakter</td></tr>
+<tr><td>SESSION_SECRET</td><td>Ya</td><td>Penandatangan session; harus acak dan rahasia.</td><td>string acak ≥ 32 byte</td></tr></table>
+<pre>PORT=3000
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=jafarilab
+DB_USER=jafarilab_app
+DB_PASSWORD=ganti_dengan_password_kuat
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=ganti_dengan_password_admin_kuat
+SESSION_SECRET=ganti_dengan_random_secret_panjang</pre>
+<div class="warning"><b>Penting:</b> jangan commit <code>.env</code>, password, dump produksi, atau session secret ke repository. Mengubah <code>ADMIN_PASSWORD</code> setelah akun dibuat tidak otomatis mengubah password di database.</div>
+
+<h2>7. Menjalankan Aplikasi</h2>
+<table><tr><th>Perintah</th><th>Tujuan</th></tr><tr><td><code>npm start</code></td><td>Menjalankan <code>node index.js</code>.</td></tr><tr><td><code>npm run dev</code></td><td>Mode pengembangan dengan nodemon; nodemon perlu tersedia sebagai dependency/devDependency.</td></tr><tr><td><code>node --check index.js</code></td><td>Memeriksa syntax tanpa menjalankan server.</td></tr></table>
+<h3>Menjalankan pada port alternatif</h3>
+<pre># PowerShell
+$env:PORT=3100
+node index.js</pre>
+<p>Server harus menampilkan <code>Server berjalan di http://localhost:PORT (MySQL)</code>.</p>
+
+<h2>8. Database dan Seeding</h2>
+<table><tr><th>Tabel</th><th>Kolom penting</th><th>Tujuan</th></tr>
+<tr><td>admins</td><td>id, username, password_hash, created_at</td><td>Akun administrator.</td></tr>
+<tr><td>projects</td><td>title, category, description, year, image, link, sort_order</td><td>Item portofolio.</td></tr>
+<tr><td>services</td><td>title, description, sort_order</td><td>Daftar layanan.</td></tr>
+<tr><td>settings</td><td>key, value</td><td>CMS teks berbentuk key-value.</td></tr></table>
+<p><code>config/database.js</code> membuat database dan seluruh tabel secara idempoten. Seed memakai <code>INSERT IGNORE</code> atau pemeriksaan tabel, sehingga restart normal tidak menggandakan data. Jika proyek MySQL masih kosong dan file SQLite lama tersedia, data lama dicoba dipindahkan dalam transaksi.</p>
+<h3>Import manual</h3>
+<pre>mysql -u root -p &lt; database/jafarilab.sql</pre>
+<div class="note">Source code adalah acuan schema runtime yang paling mutakhir. File SQL perlu ikut diperbarui bila schema atau daftar setting berubah.</div>
+
+<h2>9. Alur Autentikasi</h2>
+<ol><li>Admin mengirim username/password ke <code>POST /api/auth/login</code>.</li><li>Server mencari username dengan prepared statement.</li><li><code>bcryptjs</code> membandingkan password dengan hash.</li><li>Jika benar, <code>adminId</code> dan <code>username</code> disimpan pada session.</li><li>Browser menerima cookie session dengan <code>httpOnly</code>, <code>sameSite=lax</code>, masa aktif 8 jam.</li><li>Endpoint mutasi memanggil <code>requireAuth</code>.</li><li>Logout menghancurkan session.</li></ol>
+<p><code>GET /admin</code> menampilkan login atau dashboard berdasarkan session. <code>GET /admin/dashboard</code> mengalihkan pengguna tanpa session kembali ke login.</p>
+
+<div class="page-break"></div>
+<h2>10. Dokumentasi API</h2>
+<p>Semua response menggunakan JSON, umumnya berbentuk <code>{"success": true, "data": ...}</code>. Endpoint admin memerlukan cookie session valid.</p>
+<h3>Autentikasi</h3>
+<table><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Body/hasil</th></tr>
+<tr><td>POST</td><td>/api/auth/login</td><td>Tidak</td><td><code>{username,password}</code>; membuat session.</td></tr>
+<tr><td>GET</td><td>/api/auth/me</td><td>Ya</td><td>Mengembalikan username session atau 401.</td></tr>
+<tr><td>POST</td><td>/api/auth/logout</td><td>Ya</td><td>Menghancurkan session.</td></tr></table>
+<h3>Portofolio</h3>
+<table><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Keterangan</th></tr>
+<tr><td>GET</td><td>/api/portfolio</td><td>Tidak</td><td>Daftar proyek urut <code>sort_order,id</code>.</td></tr>
+<tr><td>POST</td><td>/api/admin/portfolio</td><td>Ya</td><td>Tambah proyek; multipart/form-data.</td></tr>
+<tr><td>PUT</td><td>/api/admin/portfolio/:id</td><td>Ya</td><td>Edit proyek; gambar lama dipertahankan bila tidak upload baru.</td></tr>
+<tr><td>DELETE</td><td>/api/admin/portfolio/:id</td><td>Ya</td><td>Hapus record proyek.</td></tr></table>
+<p>Field: <code>title</code> dan <code>category</code> wajib; <code>description</code>, <code>year</code>, <code>link</code>, <code>sort_order</code>, serta file <code>image</code> opsional.</p>
+<h3>Layanan</h3>
+<table><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Keterangan</th></tr>
+<tr><td>GET</td><td>/api/services</td><td>Tidak</td><td>Daftar layanan.</td></tr>
+<tr><td>POST</td><td>/api/admin/services</td><td>Ya</td><td>Tambah title, description, sort_order.</td></tr>
+<tr><td>PUT</td><td>/api/admin/services/:id</td><td>Ya</td><td>Edit layanan.</td></tr>
+<tr><td>DELETE</td><td>/api/admin/services/:id</td><td>Ya</td><td>Hapus layanan.</td></tr></table>
+<h3>Pengaturan CMS</h3>
+<table><tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Keterangan</th></tr>
+<tr><td>GET</td><td>/api/settings</td><td>Tidak</td><td>Seluruh setting sebagai object key-value.</td></tr>
+<tr><td>PUT</td><td>/api/admin/settings</td><td>Ya</td><td>Upsert key yang ada pada whitelist server dalam satu transaksi.</td></tr></table>
+<h3>Status umum</h3>
+<table><tr><th>Status</th><th>Makna</th></tr><tr><td>200</td><td>Operasi berhasil.</td></tr><tr><td>400</td><td>Input wajib tidak lengkap/tidak valid.</td></tr><tr><td>401</td><td>Login gagal atau session tidak tersedia.</td></tr><tr><td>404</td><td>Resource tidak ditemukan.</td></tr><tr><td>500</td><td>Error server/database; detail dicatat ke console server.</td></tr></table>
+
+<h2>11. Panel Admin dan CMS</h2>
+<p>Panel admin diakses melalui <code>/admin</code>. Navigasi terdiri dari Ringkasan, Portofolio, Layanan, dan Konten Website.</p>
+<ul><li><b>Portofolio:</b> tambah, edit, hapus, upload gambar, atur urutan.</li><li><b>Layanan:</b> tambah, edit, hapus, atur urutan.</li><li><b>Konten website:</b> identitas, topbar, hero, keunggulan, judul section, tentang, statistik, kontak, sosial, dan footer.</li></ul>
+<p><code>public/js/admin.js</code> memuat data secara paralel, mengisi form berdasarkan atribut <code>name</code>, dan menyimpan melalui API. Penambahan field setting baru membutuhkan sinkronisasi di tiga tempat: field HTML admin, whitelist route settings, dan default seed/database.</p>
+
+<h2>12. Frontend Publik</h2>
+<p><code>public/index.html</code> menyediakan struktur dan fallback content. Setelah halaman dimuat, <code>public/js/app.js</code> mengambil settings, proyek, serta layanan secara paralel. Konten kemudian dimasukkan ke DOM. Proyek dan layanan dirender berdasarkan jumlah record sehingga tidak dibatasi tiga item.</p>
+<p>Fitur browser meliputi menu responsif, animasi IntersectionObserver, link proyek opsional, link email, dan link media sosial. CSS utama berada di <code>public/css/style.css</code>, dengan aturan admin terpisah di <code>public/css/admin.css</code>.</p>
+
+<h2>13. Pengelolaan Upload</h2>
+<ul><li>Jenis file: JPEG, PNG, WebP, dan GIF.</li><li>Batas ukuran: 5 MB.</li><li>Nama file: timestamp + random bytes + ekstensi asli.</li><li>Lokasi: <code>public/uploads/</code>.</li><li>Path publik disimpan sebagai <code>/uploads/nama-file.ext</code>.</li></ul>
+<div class="warning"><b>Catatan pemeliharaan:</b> penghapusan proyek atau penggantian gambar belum menghapus file lama dari disk. Buat proses garbage collection berkala agar folder upload tidak terus membesar.</div>
+
+<div class="page-break"></div>
+<h2>14. Panduan Coding</h2>
+<h3>Prinsip umum</h3>
+<ul class="check"><li>Gunakan ES Modules: <code>import</code>/<code>export</code>, bukan <code>require</code>.</li><li>Pisahkan routing, middleware, database, UI, dan aset berdasarkan tanggung jawab.</li><li>Semua query dengan input pengguna wajib memakai placeholder <code>?</code> dan prepared statement.</li><li>Endpoint mutasi admin wajib memakai <code>requireAuth</code>.</li><li>Validasi input di server; validasi HTML hanya bantuan UX.</li><li>Jangan mengirim stack trace atau konfigurasi rahasia ke client.</li><li>Gunakan transaksi untuk perubahan banyak record yang harus atomik.</li><li>Jaga response API konsisten: <code>success</code>, <code>data</code>, dan/atau <code>message</code>.</li></ul>
+<h3>Konvensi penamaan</h3>
+<table><tr><th>Area</th><th>Konvensi</th><th>Contoh</th></tr><tr><td>JavaScript</td><td>camelCase untuk variabel/fungsi</td><td><code>hydrateContent</code></td></tr><tr><td>Database</td><td>snake_case</td><td><code>sort_order</code></td></tr><tr><td>Setting keys</td><td>snake_case dan prefix section</td><td><code>hero_description</code></td></tr><tr><td>CSS</td><td>kebab-case, class semantik</td><td><code>project-visual</code></td></tr><tr><td>Route file</td><td>plural sesuai resource</td><td><code>services.js</code></td></tr></table>
+<h3>Pola route yang disarankan</h3>
+<pre>router.post('/api/admin/resource', requireAuth, async (req, res, next) =&gt; {
+  try {
+    const value = String(req.body.value || '').trim();
+    if (!value) {
+      return res.status(400).json({ success: false, message: 'Value wajib diisi.' });
+    }
+    const [result] = await db.execute(
+      'INSERT INTO resources (value) VALUES (?)',
+      [value]
+    );
+    res.json({ success: true, id: result.insertId });
+  } catch (error) {
+    next(error);
+  }
+});</pre>
+<h3>Aturan frontend</h3>
+<ul><li>Gunakan <code>textContent</code> untuk teks dari API. Jika harus memakai <code>innerHTML</code>, lakukan escaping.</li><li>Jangan membangun URL sensitif langsung dari input tanpa validasi protocol.</li><li>Selalu periksa <code>response.ok</code> dan tangani 401 dengan redirect login.</li><li>Jaga progressive enhancement: HTML fallback tetap dapat dibaca ketika API gagal.</li><li>Pastikan elemen baru responsif pada breakpoint yang ada.</li></ul>
+<h3>Format dan kualitas</h3>
+<p>Source saat ini cukup ringkas. Untuk pengembangan tim, gunakan ESLint + Prettier, pecah fungsi panjang, dan tambahkan JSDoc hanya pada fungsi dengan kontrak yang tidak jelas. Hindari komentar yang sekadar mengulang kode.</p>
+
+<h2>15. Pola Penambahan Fitur</h2>
+<h3>Menambah field CMS</h3>
+<ol><li>Tambahkan input dengan <code>name="key_baru"</code> pada dashboard admin.</li><li>Tambahkan key ke whitelist di <code>routes/settings.js</code>.</li><li>Tambahkan nilai default di <code>config/database.js</code>.</li><li>Hubungkan key ke elemen publik di <code>public/js/app.js</code>.</li><li>Perbarui <code>database/jafarilab.sql</code> dan dokumentasi.</li><li>Uji load, simpan, reload browser, dan restart server.</li></ol>
+<h3>Menambah resource CRUD</h3>
+<ol><li>Buat/migrasikan tabel.</li><li>Buat file route dengan GET publik dan mutasi admin.</li><li>Pasang route di <code>index.js</code>.</li><li>Tambahkan UI admin dan state/rendering.</li><li>Tambahkan rendering publik jika diperlukan.</li><li>Uji happy path, input salah, 401, 404, dan error database.</li></ol>
+
+<h2>16. Validasi dan Pengujian</h2>
+<p>Project belum mempunyai automated test; script <code>npm test</code> masih placeholder. Minimal verification sebelum rilis:</p>
+<ul class="check"><li><code>node --check</code> untuk seluruh file JavaScript server dan browser.</li><li>Server berhasil startup dan terhubung MySQL.</li><li><code>GET /</code>, settings, portfolio, dan services menghasilkan 200.</li><li>Login salah menghasilkan 401; login benar membuat session.</li><li>CRUD proyek dan layanan berfungsi, termasuk upload valid/terlalu besar.</li><li>Pengaturan CMS tersimpan dan tampil setelah reload.</li><li>Logout mengakhiri akses endpoint admin.</li><li>Uji tampilan desktop dan mobile.</li></ul>
+<h3>Roadmap test</h3>
+<p>Gunakan Node test runner atau Vitest untuk unit test, Supertest untuk integration API, dan Playwright untuk alur login/CMS. Gunakan database test terpisah dan bersihkan fixture setelah setiap suite.</p>
+
+<h2>17. Keamanan</h2>
+<h3>Yang sudah diterapkan</h3>
+<ul><li>Password di-hash dengan bcrypt.</li><li>Query input menggunakan parameter.</li><li>Cookie session <code>httpOnly</code> dan <code>sameSite=lax</code>.</li><li>Mutasi data dilindungi middleware autentikasi.</li><li>Upload dibatasi tipe MIME dan ukuran.</li><li>Setting yang dapat diubah dibatasi whitelist.</li></ul>
+<h3>Wajib sebelum produksi</h3>
+<ul><li>Ganti MemoryStore session dengan MySQL/Redis session store.</li><li>Aktifkan HTTPS dan <code>cookie.secure=true</code>; set <code>app.set('trust proxy', 1)</code> di belakang proxy.</li><li>Gunakan <code>SESSION_SECRET</code>, password admin, dan DB password yang kuat.</li><li>Pasang Helmet, rate limiting pada login, CSRF protection, dan audit log.</li><li>Validasi URL agar hanya menerima <code>http:</code>/<code>https:</code>.</li><li>Scan konten upload berdasarkan isi file, bukan hanya MIME client.</li><li>Gunakan user MySQL dengan least privilege, bukan root.</li><li>Jangan tampilkan panel admin tanpa kontrol akses jaringan bila tidak diperlukan.</li></ul>
+
+<div class="page-break"></div>
+<h2>18. Deployment dan ngrok</h2>
+<h3>Preview melalui ngrok</h3>
+<ol><li>Jalankan aplikasi dan pastikan <code>http://localhost:3000</code> aktif.</li><li>Konfigurasikan token ngrok sekali: <code>ngrok config add-authtoken TOKEN</code>.</li><li>Jalankan <code>ngrok http 3000</code>.</li><li>Gunakan URL HTTPS yang ditampilkan.</li></ol>
+<div class="warning">URL ngrok membuka aplikasi lokal ke internet. Gunakan password admin kuat, jangan membagikan token, dan hentikan tunnel setelah selesai.</div>
+<h3>Deployment produksi</h3>
+<p>Gunakan process manager seperti PM2 atau service manager OS, reverse proxy Nginx/Apache, HTTPS, database terkelola, session store persisten, dan penyimpanan upload persisten/object storage. Pastikan folder upload tidak hilang saat deploy container baru.</p>
+<h3>Checklist environment produksi</h3>
+<ul class="check"><li>Environment rahasia tersimpan di secret manager.</li><li>HTTPS dan domain aktif.</li><li>Backup database dan upload terjadwal.</li><li>Log error dan uptime monitoring aktif.</li><li>Cookie production aman.</li><li>Firewall hanya membuka port yang dibutuhkan.</li></ul>
+
+<h2>19. Backup dan Pemeliharaan</h2>
+<h3>Backup MySQL</h3>
+<pre>mysqldump -u USER -p --single-transaction jafarilab &gt; jafarilab-backup.sql</pre>
+<h3>Restore</h3>
+<pre>mysql -u USER -p jafarilab &lt; jafarilab-backup.sql</pre>
+<p>Backup database harus dipasangkan dengan salinan folder <code>public/uploads</code>. Uji restore berkala; backup yang belum pernah diuji belum dapat dianggap aman.</p>
+<h3>Rutinitas</h3>
+<ul><li>Perbarui dependency secara terkontrol dan audit kerentanan.</li><li>Rotasi password dan secret.</li><li>Bersihkan file upload yatim.</li><li>Pantau ukuran database, disk, log, error 5xx, dan login gagal.</li><li>Jalankan smoke test setelah setiap perubahan.</li></ul>
+
+<h2>20. Troubleshooting</h2>
+<table><tr><th>Gejala</th><th>Penyebab umum</th><th>Solusi</th></tr>
+<tr><td><code>EADDRINUSE :::3000</code></td><td>Port 3000 sudah dipakai proses lain.</td><td>Cari PID dengan <code>Get-NetTCPConnection -LocalPort 3000</code>, hentikan proses yang benar, atau gunakan port lain.</td></tr>
+<tr><td>Gagal terhubung MySQL</td><td>Service mati atau DB_* salah.</td><td>Aktifkan MySQL, cek host/port/user/password dan izin user.</td></tr>
+<tr><td>Login selalu gagal</td><td>Akun seed sudah ada; perubahan .env tidak mengubah record.</td><td>Reset password hash melalui prosedur admin/database yang aman.</td></tr>
+<tr><td>401 dari endpoint admin</td><td>Session kedaluwarsa/tidak terkirim.</td><td>Login ulang; cek cookie, hostname, proxy, dan session store.</td></tr>
+<tr><td>Upload gagal</td><td>Folder tidak ada/tidak writable, MIME salah, atau >5 MB.</td><td>Buat folder, perbaiki izin, dan gunakan format yang diterima.</td></tr>
+<tr><td>Konten baru tidak tampil</td><td>Key belum di-whitelist/default/hydrate.</td><td>Ikuti lima titik sinkronisasi pada bagian penambahan field CMS.</td></tr>
+<tr><td>Karakter menjadi Â/â</td><td>Encoding file/data tidak konsisten.</td><td>Simpan source UTF-8, gunakan utf8mb4 MySQL, perbaiki data lama yang mojibake.</td></tr>
+<tr><td><code>npm run dev</code> gagal</td><td>nodemon belum terpasang lokal.</td><td><code>npm install --save-dev nodemon</code> atau pakai <code>npm start</code>.</td></tr></table>
+
+<h2>21. Keterbatasan dan Roadmap</h2>
+<ol><li><b>Session produksi:</b> ganti MemoryStore.</li><li><b>Automated tests:</b> bangun integration dan E2E suite.</li><li><b>Upload lifecycle:</b> hapus file lama/yatim dan gunakan storage persisten.</li><li><b>Security hardening:</b> CSRF, Helmet, rate limit, secure cookie, audit log.</li><li><b>Role management:</b> saat ini hanya satu tipe administrator.</li><li><b>Schema migration:</b> gunakan migration tool, bukan hanya CREATE TABLE.</li><li><b>Observability:</b> structured logging, health endpoint, metrics, alerting.</li><li><b>SEO CMS:</b> title, meta description, OG image, sitemap.</li><li><b>Encoding cleanup:</b> normalisasi string lama yang menunjukkan mojibake.</li></ol>
+
+<h2>22. Checklist Serah Terima</h2>
+<ul class="check"><li>Source code dan lockfile tersedia.</li><li><code>.env.example</code> tersedia tanpa rahasia.</li><li>Akun admin produksi diserahkan melalui kanal aman.</li><li>Kredensial database menggunakan least privilege.</li><li>Database dan upload sudah dibackup.</li><li>Domain, HTTPS, reverse proxy, dan process manager terdokumentasi.</li><li>Login, CRUD, CMS, email, sosial, dan responsive view diuji.</li><li>Prosedur restore dan rollback diuji.</li><li>Pemilik sistem memahami batasan session/upload saat ini.</li></ul>
+
+<h2>Lampiran: Referensi Cepat</h2>
+<pre># Install dan run
+npm install
+npm start
+
+# Pemeriksaan syntax
+node --check index.js
+node --check config/database.js
+node --check routes/auth.js
+node --check routes/portfolio.js
+node --check routes/services.js
+node --check routes/settings.js
+node --check public/js/app.js
+node --check public/js/admin.js
+
+# URL lokal
+Website: http://localhost:3000/
+Admin:   http://localhost:3000/admin
+
+# Tunnel
+ngrok http 3000</pre>
+<p class="footer-note">Dokumentasi JafariLab v1.0 — dibuat dari audit source lokal. Rahasia environment sengaja tidak disertakan.</p>
+</body>
+</html>

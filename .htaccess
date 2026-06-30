@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /nusahomelab/
+
+# Forward any request under this project into the public folder
+RewriteCond %{REQUEST_URI} !^/nusahomelab/public/
+RewriteRule ^(.*)$ public/$1 [L]
