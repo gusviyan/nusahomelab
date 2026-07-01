@@ -1,6 +1,26 @@
 const BASE_URL = window.APP_BASE_URL || '';
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#site-nav');
+const themeToggle = document.querySelector('.theme-toggle');
+
+const setTheme = theme => {
+  const isDark = theme === 'dark';
+  document.body.classList.toggle('dark-mode', isDark);
+  if (themeToggle) {
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+};
+
+const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+setTheme(savedTheme);
+
+themeToggle?.addEventListener('click', () => {
+  const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+  setTheme(nextTheme);
+  localStorage.setItem('theme', nextTheme);
+});
 
 toggle?.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
@@ -13,6 +33,26 @@ nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => 
   toggle?.setAttribute('aria-expanded', 'false');
   if (toggle) toggle.textContent = 'Menu';
 }));
+
+const chatButton = document.querySelector('.chat-button');
+const chatPicker = document.querySelector('.chat-picker');
+chatButton?.addEventListener('click', () => {
+  const isOpen = chatPicker?.classList.toggle('open');
+  if (chatPicker) {
+    chatPicker.setAttribute('aria-hidden', String(!isOpen));
+  }
+  if (chatButton) {
+    chatButton.setAttribute('aria-expanded', String(isOpen));
+  }
+});
+
+document.addEventListener('click', event => {
+  if (chatPicker && chatButton && !chatPicker.contains(event.target) && !chatButton.contains(event.target)) {
+    chatPicker.classList.remove('open');
+    chatPicker.setAttribute('aria-hidden', 'true');
+    chatButton.setAttribute('aria-expanded', 'false');
+  }
+});
 
 const observer = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) {
@@ -103,20 +143,42 @@ async function hydrateContent() {
     ).join('');
 
     const projectList = document.querySelector('.projects');
-    projectList.innerHTML = '';
+    const projectMoreButton = document.querySelector('.project-more');
+    const projectCount = projects.length;
+    const projectPreviewLimit = 6;
     const colors = ['#bdc6b4', '#da704d', '#c8d650', '#87b8e8', '#d8b5df'];
-    projects.forEach((project, index) => {
-      const article = document.createElement('article');
-      article.className = `project reveal visible${index === 0 ? ' project-large' : ''}`;
-      article.innerHTML = `<div class="project-visual"></div><div class="project-meta"><div><h2>${escapeHtml(project.title)}</h2><p>${escapeHtml(project.category)}</p></div><span>${escapeHtml(project.year || '')}</span></div>`;
-      const visual = article.querySelector('.project-visual');
-      visual.style.background = project.image ? `linear-gradient(#0002,#0002), url("${encodeURI(project.image)}") center/cover` : colors[index % colors.length];
-      if (project.link) {
-        article.style.cursor = 'pointer';
-        article.addEventListener('click', () => window.open(project.link, '_blank', 'noopener'));
+
+    const renderProjects = showAll => {
+      const visibleProjects = showAll ? projects : projects.slice(0, projectPreviewLimit);
+      projectList.innerHTML = '';
+      visibleProjects.forEach((project, index) => {
+        const article = document.createElement('article');
+        article.className = `project reveal visible${index === 0 ? ' project-large' : ''}`;
+        article.innerHTML = `<div class="project-visual"></div><div class="project-meta"><div><h2>${escapeHtml(project.title)}</h2><p>${escapeHtml(project.category)}</p></div><span>${escapeHtml(project.year || '')}</span>${project.description ? `<p class="project-description">${escapeHtml(project.description)}</p>` : ''}</div>`;
+        const visual = article.querySelector('.project-visual');
+        visual.style.background = project.image ? `linear-gradient(#0002,#0002), url("${encodeURI(project.image)}") center/cover` : colors[index % colors.length];
+        if (project.link) {
+          article.style.cursor = 'pointer';
+          article.addEventListener('click', () => window.open(project.link, '_blank', 'noopener'));
+        }
+        projectList.append(article);
+      });
+      if (projectMoreButton) {
+        if (projectCount > projectPreviewLimit) {
+          projectMoreButton.style.display = 'inline-flex';
+          projectMoreButton.textContent = showAll ? 'Sembunyikan' : 'Lihat semua proyek';
+        } else {
+          projectMoreButton.style.display = 'none';
+        }
       }
-      projectList.append(article);
+    };
+
+    let showAllProjects = false;
+    projectMoreButton?.addEventListener('click', () => {
+      showAllProjects = !showAllProjects;
+      renderProjects(showAllProjects);
     });
+    renderProjects(false);
 
     text('.about-content > span', settings.about_label);
     text('.about-content h2', settings.about_title);

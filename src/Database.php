@@ -14,7 +14,7 @@ final class Database
 
         $host = (string) env('DB_HOST', '127.0.0.1');
         $port = (int) env('DB_PORT', 3306);
-        $name = preg_replace('/[^a-zA-Z0-9_]/', '', (string) env('DB_NAME', 'jafarilab'));
+        $name = preg_replace('/[^a-zA-Z0-9_]/', '', (string) env('DB_NAME', 'nusahomelab'));
         $user = (string) env('DB_USER', 'root');
         $password = (string) env('DB_PASSWORD', '');
         $options = [

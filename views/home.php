@@ -14,6 +14,7 @@
   <div class="topbar"><div>Butuh bantuan untuk proyek digital Anda?</div><div><a href="#contact">Konsultasi Gratis</a></div></div>
   <header class="site-header">
     <a class="brand" href="#home"><span class="site-title">Nusa <span class="dot">HomeLab</span></span></a>
+    <!-- <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">🌙</button> -->
     <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav"><a href="#home">Home</a><a href="#services">Layanan</a><a href="#work">Portofolio</a><a href="#about">Tentang</a><a href="#contact">Kontak</a><a class="nav-cta" href="#contact">Mulai Proyek <span>→</span></a></nav>
   </header>
@@ -48,6 +49,7 @@
         <article class="project reveal"><div class="project-visual visual-two"><div class="poster"><small>KALA / 24</small><strong>REKA<br><i>RUANG</i></strong><span>ARCHITECTURE THAT BREATHES</span></div><span class="project-number">02</span></div><div class="project-meta"><div><h2>Kala Studio</h2><p>Brand Identity · Web Design</p></div><span>2025</span></div></article>
         <article class="project reveal"><div class="project-visual visual-three"><div class="phone"><div class="phone-top">9:41</div><small>GOOD MORNING</small><h3>Find your<br>daily balance.</h3><div class="balance-card"><span>DAILY SCORE</span><strong>86</strong></div></div><span class="project-number">03</span></div><div class="project-meta"><div><h2>Ruang Sehat</h2><p>Product Design · Mobile</p></div><span>2025</span></div></article>
       </div>
+      <div class="project-actions reveal"><button class="project-more primary-btn" type="button">Lihat semua proyek</button></div>
     </section>
 
     <section class="about section" id="about"><div class="about-visual reveal"><div class="code-card">&lt;idea&gt;<br><span>&nbsp;&nbsp;design + code</span><br>&lt;/impact&gt;</div><div class="about-badge"><b>04+</b><span>Tahun<br>Pengalaman</span></div></div><div class="about-content reveal"><span>TENTANG NUSA HOMELAB</span><h2>Partner digital yang mengerti desain <em>dan</em> teknologi.</h2><p class="about-lead">Kami percaya website terbaik bukan sekadar terlihat bagus—ia punya tujuan, bekerja cepat, dan membantu bisnis bergerak maju.</p><div class="stats"><div class="stat"><strong>28+</strong><span>Proyek selesai</span></div><div class="stat"><strong>18+</strong><span>Klien bahagia</span></div><div class="stat"><strong>100%</strong><span>Komitmen</span></div></div></div></section>
@@ -55,4 +57,12 @@
     <section class="contact section" id="contact"><div><span>SIAP MEMULAI?</span><h2>Wujudkan ide digital<br>Anda bersama kami.</h2><p>Ceritakan kebutuhan Anda. Konsultasi pertama gratis dan tanpa komitmen.</p></div><a class="contact-button" href="mailto:hello@nusahomelab.id"><span>hello@nusahomelab.id</span><b>Mulai percakapan →</b></a></section>
   </main>
   <footer><a class="brand" href="#"></a><p>Solusi website dan desain digital untuk bisnis yang ingin tumbuh.</p><div><a href="#">Instagram</a><a href="#">LinkedIn</a></div><small>© 2026 Nusa HomeLab. All rights reserved.</small></footer>
+  <div class="chat-widget" aria-live="polite">
+    <button class="chat-button" type="button" aria-expanded="false" aria-label="Chat WhatsApp">💬 Chat</button>
+    <div class="chat-picker" aria-hidden="true">
+      <div class="chat-picker-title">Pilih kontak WhatsApp</div>
+      <a href="https://wa.me/6287776890111" target="_blank" rel="noreferrer">Gusviyan</a>
+      <a href="https://wa.me/628210336402700" target="_blank" rel="noreferrer">Faried</a>
+    </div>
+  </div>
 </body></html>
