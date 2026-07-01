@@ -108,7 +108,7 @@ async function hydrateContent() {
     projects.forEach((project, index) => {
       const article = document.createElement('article');
       article.className = `project reveal visible${index === 0 ? ' project-large' : ''}`;
-      article.innerHTML = `<div class="project-visual"><span class="project-number">${String(index + 1).padStart(2, '0')}</span></div><div class="project-meta"><div><h2>${escapeHtml(project.title)}</h2><p>${escapeHtml(project.category)}</p></div><span>${escapeHtml(project.year || '')}</span></div>`;
+      article.innerHTML = `<div class="project-visual"></div><div class="project-meta"><div><h2>${escapeHtml(project.title)}</h2><p>${escapeHtml(project.category)}</p></div><span>${escapeHtml(project.year || '')}</span></div>`;
       const visual = article.querySelector('.project-visual');
       visual.style.background = project.image ? `linear-gradient(#0002,#0002), url("${encodeURI(project.image)}") center/cover` : colors[index % colors.length];
       if (project.link) {

@@ -11,7 +11,7 @@
   <script src="<?= BASE_URL ?: '' ?>/js/app.js" defer></script>
 </head>
 <body class="rw-style">
-  <div class="topbar"><div>Butuh bantuan untuk proyek digital Anda?</div><div><a href="#contact">Konsultasi Gratis</a><a href="<?= BASE_URL ?: '' ?>/admin">Login Admin</a></div></div>
+  <div class="topbar"><div>Butuh bantuan untuk proyek digital Anda?</div><div><a href="#contact">Konsultasi Gratis</a></div></div>
   <header class="site-header">
     <a class="brand" href="#home"><span class="site-title">Nusa <span class="dot">HomeLab</span></span></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
