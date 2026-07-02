@@ -6,9 +6,11 @@
   <title>Nusa HomeLab — Digital Creative Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= BASE_URL ?: '' ?>/css/style.css">
-  <script>window.APP_BASE_URL='<?= BASE_URL ?>';</script>
-  <script src="<?= BASE_URL ?: '' ?>/js/app.js" defer></script>
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
+<script>
+    window.APP_BASE_URL='<?= BASE_URL ?>';
+</script>
+<script src="<?= BASE_URL ?>/js/app.js" defer></script>
 </head>
 <body class="rw-style">
   <div class="topbar"><div>Butuh bantuan untuk proyek digital Anda?</div><div><a href="#contact">Konsultasi Gratis</a></div></div>

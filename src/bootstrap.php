@@ -8,7 +8,6 @@ function getBaseUrl(): string
 {
     $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
     $scriptName = preg_replace('#/+(index\.php)?$#', '', $scriptName);
-    $scriptName = preg_replace('#/public$#', '', $scriptName);
     $baseUrl = rtrim($scriptName, '/');
     return $baseUrl === '' ? '' : $baseUrl;
 }
@@ -92,7 +91,7 @@ function uploadImage(string $field, int $maxBytes, array $allowedMimes, string $
         throw new InvalidArgumentException('Format gambar tidak didukung.');
     }
 
-    $directory = BASE_PATH.'/public/uploads';
+    $directory = BASE_PATH.'/uploads';
     if (!is_dir($directory) && !mkdir($directory, 0775, true) && !is_dir($directory)) {
         throw new RuntimeException('Folder upload tidak dapat dibuat.');
     }

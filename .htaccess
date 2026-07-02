@@ -1,6 +1,6 @@
+DirectoryIndex index.php
 RewriteEngine On
-RewriteBase /nusahomelab/
 
-# Forward any request under this project into the public folder
-RewriteCond %{REQUEST_URI} !^/nusahomelab/public/
-RewriteRule ^(.*)$ public/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
